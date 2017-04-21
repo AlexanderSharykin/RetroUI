@@ -19,7 +19,7 @@ Add merged dictionaries in App.xaml
     <ResourceDictionary Source="/RetroUI;component/Themes/Colors.Retro.xaml"/>
     <ResourceDictionary Source="/RetroUI;component/Themes/Generic.xaml"/>
     
-#Screenshots
+# Screenshots
 
 ![retro Button](https://github.com/AlexanderSharykin/RetroUI/blob/master/Screens/Buttons.png)
 
@@ -31,7 +31,7 @@ Add merged dictionaries in App.xaml
 
 ![retro TreeView](https://github.com/AlexanderSharykin/RetroUI/blob/master/Screens/TreeView.png)
 
-#Credits
+# Credits
 
 Controls use [Fixedsys Excelsior 3.01](https://en.wikipedia.org/wiki/Fixedsys_Excelsior) font which is a monospaced font designed by Darien Gavin Valentine based on DOS Fixedsys font.
 
