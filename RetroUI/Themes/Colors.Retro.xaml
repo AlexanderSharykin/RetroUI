@@ -1,0 +1,11 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <SolidColorBrush x:Key="RetroBlue"  Color="#00a0a0"/>
+
+    <SolidColorBrush x:Key="RetroGreen" Color="#00a000"/>
+    
+    <SolidColorBrush x:Key="RetroSilver" Color="#c0c0c0"/>
+
+    <!--<SolidColorBrush Color="White" x:Key="ScrollHatchBrush"/>-->
+</ResourceDictionary>

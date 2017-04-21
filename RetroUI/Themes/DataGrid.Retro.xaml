@@ -1,0 +1,177 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"                    
+                    xmlns:retroUi="clr-namespace:RetroUI"
+                    xmlns:themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
+
+    <Style TargetType="{x:Type DataGridCell}">
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Padding" Value="3" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="FontFamily" Value="pack://application:,,,/RetroUI;Component/Resources/#Fixedsys Excelsior 3.01"/>
+        <Setter Property="Background" Value="{StaticResource RetroBlue}"/>
+        <Setter Property="retroUi:Selected.Background" Value="{StaticResource RetroGreen}"/>
+        <Setter Property="retroUi:Selected.Foreground" Value="White"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="true">
+                <Setter Property="BorderBrush" Value="Transparent"/>
+                <Setter Property="Foreground" Value="{Binding Path=(retroUi:Selected.Foreground), RelativeSource={RelativeSource Self}}"/>
+                <Setter Property="Background" Value="{Binding Path=(retroUi:Selected.Background), RelativeSource={RelativeSource Self}}"/>
+            </Trigger>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="BorderBrush" Value="Transparent"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="{x:Type DataGridRow}">
+        <Setter Property="Background" Value="{StaticResource RetroBlue}"/>
+    </Style>
+
+    <Style x:Key="ColumnHeaderGripperStyle" TargetType="{x:Type Thumb}">
+        <Setter Property="Width" Value="8"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Cursor" Value="SizeWE"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Thumb}">
+                    <Border Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type DataGridColumnHeader}" >
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Foreground" Value="{DynamicResource LightBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource RetroBlue}"/>
+
+        <!--http://stackoverflow.com/questions/4487575/how-to-show-gridline-in-the-column-header-after-appling-background-->
+        <Setter Property="BorderThickness" Value="1,0,1,1" />
+        <Setter Property="BorderBrush" Value="White" />
+
+        <!--http://stackoverflow.com/questions/5213640/remove-left-border-grid-line-for-wpf-datagrid-header-columns-to-match-data-grid-->
+        <!--http://stackoverflow.com/a/13446193/1506454-->
+        <Setter Property="Margin" Value="-1,0,0,0" />
+
+        <Setter Property="Padding" Value="10"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
+                    <Grid>
+                        <themes:DataGridHeaderBorder 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+							    BorderThickness="{TemplateBinding BorderThickness}" 
+							    Background="{TemplateBinding Background}" 
+							    IsClickable="{TemplateBinding CanUserSort}" 
+							    IsPressed="{TemplateBinding IsPressed}" 
+							    IsHovered="{TemplateBinding IsMouseOver}" 							    
+							    SortDirection="{TemplateBinding SortDirection}" 
+							    SeparatorBrush="{TemplateBinding SeparatorBrush}" 
+							    SeparatorVisibility="{TemplateBinding SeparatorVisibility}"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!--header content-->
+                                <ContentPresenter x:Name="Hdr" Grid.Row="0" Grid.ColumnSpan="2" Margin="{TemplateBinding Padding}"
+                                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+								                RecognizesAccessKey="True" 
+                                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+								                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+
+                                <!--sort glyph-->
+                                <!--http://stackoverflow.com/questions/4487786/how-to-add-back-the-sort-arrow-after-applying-background-of-column-headers-->
+                                <Path x:Name="SortArrow"
+                                            Grid.Row="0" Grid.Column="1" Margin="0,0,4,0"
+                                            HorizontalAlignment="Center" 
+                                            VerticalAlignment="Center"                                           
+                                            Width="8" Height="6"
+                                            Stretch="Fill" Fill="{TemplateBinding BorderBrush}"
+                                            RenderTransformOrigin="0.5,0.4"
+                                            Visibility="Hidden"
+                                            Data="M0,0 L1,0 0.5,1 z" />
+                            </Grid>
+
+                        </themes:DataGridHeaderBorder>
+
+                        <Thumb x:Name="PART_LeftHeaderGripper" HorizontalAlignment="Left" 
+                                   Style="{StaticResource ColumnHeaderGripperStyle}"/>
+                        <Thumb x:Name="PART_RightHeaderGripper" HorizontalAlignment="Right" 
+                                   Style="{StaticResource ColumnHeaderGripperStyle}"/>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="SortDirection" Value="Ascending">
+                            <Setter TargetName="Hdr" Property="Margin" Value="0,0,9,0" />
+                            <Setter TargetName="SortArrow" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="SortArrow" Property="RenderTransform">
+                                <Setter.Value>
+                                    <RotateTransform Angle="180" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="SortDirection" Value="Descending">
+                            <Setter TargetName="Hdr" Property="Margin" Value="0,0,9,0" />
+                            <Setter TargetName="SortArrow" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--https://stackoverflow.com/questions/25141573/how-to-style-the-top-left-corner-of-a-datagrid-in-xaml-->
+    <Style TargetType="Button" x:Key="{ComponentResourceKey ResourceId=DataGridSelectAllButtonStyle, TypeInTargetAssembly={x:Type DataGrid}}">
+        <Setter Property="Background" Value="{Binding Path=Background, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+        <Setter Property="BorderBrush" Value="White"/>
+        <Setter Property="BorderThickness" Value="0,0,1,1"/>
+        <Setter Property="retroUi:Selected.Background" Value="{StaticResource RetroGreen}"/>
+        
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <themes:DataGridHeaderBorder x:Name="border"
+                                Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                    </themes:DataGridHeaderBorder>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="{Binding Path=(retroUi:Selected.Background), RelativeSource={RelativeSource TemplatedParent}}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>    
+
+    <Style TargetType="{x:Type DataGrid}">
+        <Setter Property="FontFamily" Value="pack://application:,,,/RetroUI;Component/Resources/#Fixedsys Excelsior 3.01"/>
+        <Setter Property="GridLinesVisibility" Value="Vertical"/>
+        <Setter Property="Background" Value="{StaticResource RetroBlue}"/>
+        <Setter Property="VerticalGridLinesBrush" Value="White"/>
+        <Setter Property="BorderThickness" Value="0"/>
+    </Style>
+
+    <Style TargetType="{x:Type DataGridRowHeader}">
+        <Setter Property="Background" Value="{StaticResource RetroBlue}"/>
+        <Setter Property="retroUi:Selected.Background" Value="{StaticResource RetroGreen}"/>
+        <Setter Property="BorderBrush" Value="White"/>
+        <Setter Property="BorderThickness" Value="0,0,1,0"/>
+        <Style.Triggers>
+            <Trigger Property="IsRowSelected" Value="True">
+                <Setter Property="Background" Value="{Binding Path=(retroUi:Selected.Background), RelativeSource={RelativeSource Self}}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+</ResourceDictionary>

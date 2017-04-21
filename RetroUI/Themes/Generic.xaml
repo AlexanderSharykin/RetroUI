@@ -1,0 +1,19 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/RetroUI;component/Themes/Button.Retro.xaml"/>
+        <ResourceDictionary Source="/RetroUI;component/Themes/CheckBox.Retro.xaml"/>
+        <ResourceDictionary Source="/RetroUI;component/Themes/ComboBox.Retro.xaml"/>        
+        <ResourceDictionary Source="/RetroUI;component/Themes/DataGrid.Retro.xaml"/>
+        <ResourceDictionary Source="/RetroUI;component/Themes/GroupBox.Retro.xaml"/>
+        <ResourceDictionary Source="/RetroUI;component/Themes/ListBox.Retro.xaml"/>
+        <ResourceDictionary Source="/RetroUI;component/Themes/RadioButton.Retro.xaml"/>
+        <ResourceDictionary Source="/RetroUI;component/Themes/Text.Retro.xaml"/>
+        <ResourceDictionary Source="/RetroUI;component/Themes/TabControl.Retro.xaml"/>
+        <ResourceDictionary Source="/RetroUI;component/Themes/TreeView.Retro.xaml"/>
+        <ResourceDictionary Source="/RetroUI;component/Themes/ScrollBar.Retro.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+    
+</ResourceDictionary>

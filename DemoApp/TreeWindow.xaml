@@ -1,0 +1,39 @@
+﻿<Window x:Class="DemoApp.TreeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:demoApp="clr-namespace:DemoApp"
+        Title="TreeView" 
+        WindowStartupLocation="CenterScreen"
+        Height="300" Width="300">
+    <Window.DataContext>
+        <demoApp:DemoData/>
+    </Window.DataContext>
+    
+    <Grid>
+        <TreeView ItemsSource="{Binding YearOrders.Groups}">
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding Path=Items}">
+                    <TextBlock Text="{Binding Path=Name}"/>
+                    <HierarchicalDataTemplate.ItemTemplate>
+                        <HierarchicalDataTemplate ItemsSource="{Binding Path=Products}">
+                            <TextBlock Text="{Binding}"/>
+                            <HierarchicalDataTemplate.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="{}{0}: ${1} ({2})">
+                                                <Binding Path="Code"/>
+                                                <Binding Path="Total"/>
+                                                <Binding Path="Quantity"/>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </HierarchicalDataTemplate.ItemTemplate>
+                        </HierarchicalDataTemplate>
+                    </HierarchicalDataTemplate.ItemTemplate>
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
+    </Grid>
+</Window>

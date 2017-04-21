@@ -1,0 +1,67 @@
+﻿<Window x:Class="DemoApp.ButtonsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:retroUi="clr-namespace:RetroUI;assembly=RetroUI"
+        Title="Buttons"
+        WindowStartupLocation="CenterScreen"
+        Height="240" Width="320">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <TabControl>
+            <TabItem Header="CheckBox">
+                <UniformGrid Columns="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <CheckBox Content="True" 
+                      IsChecked="True"
+                      Margin="5"
+                      Background="Gold" Foreground="Purple"/>
+                    <CheckBox Content="False" 
+                      IsChecked="False" 
+                      Margin="5"
+                      Background="Purple" Foreground="Gold"/>
+                    <CheckBox Content="Disabled" 
+                      IsChecked="{x:Null}" 
+                      Margin="5"
+                      IsEnabled="False"/>
+                </UniformGrid>
+            </TabItem>
+
+            <TabItem Header="RadioButton">
+                <UniformGrid Columns="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <RadioButton Content="True" 
+                         IsChecked="True"
+                         Margin="5"
+                         Background="AntiqueWhite" Foreground="SaddleBrown"/>
+                    <RadioButton Content="False" 
+                         IsChecked="False"
+                         Margin="5"
+                         Background="SaddleBrown" Foreground="White"/>
+                    <RadioButton Content="Disabled" 
+                         IsChecked="{x:Null}"
+                         Margin="5"
+                         IsEnabled="False"/>
+                </UniformGrid>
+            </TabItem>
+
+            <TabItem Header="Button">
+                <UniformGrid Columns="1">
+                    <Button Content="Red" Margin="5"
+                    Background="Red" retroUi:Alt.Background="DarkRed"/>
+                    <Button Content="Green" Margin="5"
+                    Background="Green" retroUi:Alt.Background="DarkGreen"/>
+                    <Button Content="Blue" Foreground="White" Margin="5"
+                    Background="Blue" retroUi:Alt.Background="DarkBlue"/>
+                </UniformGrid>
+            </TabItem>
+        </TabControl>
+        
+        <UniformGrid Margin="5" Rows="1" Grid.Row="1">
+            <Button Content="Yes" Click="CloseClick"/>
+            <Button Content="No" IsEnabled="False"/>            
+        </UniformGrid>
+
+    </Grid>
+</Window>

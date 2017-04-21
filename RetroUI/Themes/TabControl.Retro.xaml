@@ -1,0 +1,60 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:RetroUI">
+    
+    <SolidColorBrush x:Key="GrayDecorationBrush" Color="Gray"/>
+    <SolidColorBrush x:Key="LightBrush" Color="LightCyan"/>
+    
+    <local:MyThicknessConverter x:Key="thico"/>
+
+    <Style TargetType="{x:Type TabItem}">
+        <Setter Property="FontSize" Value="16"/>        
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="BorderBrush" Value="{StaticResource RetroSilver}"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="local:Disabled.Background" Value="{StaticResource RetroSilver}"/>
+        <Setter Property="MinHeight" Value="40"/>
+        <Setter Property="Padding" Value="12,2,12,4"/>
+        <Setter Property="FontFamily" Value="pack://application:,,,/RetroUI;Component/Resources/#Fixedsys Excelsior 3.01"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TabItem}">
+                    <Grid>
+                        <Border Name="Border" Opacity="0.5" SnapsToDevicePixels="True"
+                                MinHeight="{TemplateBinding MinHeight}"
+                                Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{Binding Path=BorderThickness, RelativeSource={RelativeSource TemplatedParent},
+                                Converter={StaticResource thico}, ConverterParameter='left,top,right,0'}">
+
+                            <ContentPresenter x:Name="ContentSite" 
+                                                    VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                    ContentSource="Header" Margin="{TemplateBinding Padding}"
+                                                    RecognizesAccessKey="True"/>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="Border" Property="Opacity" Value="1" />
+                            <Setter TargetName="Border" Property="Margin" 
+                                        Value="{Binding Path=BorderThickness, 
+                                        Converter={StaticResource thico}, ConverterParameter='0,0,0,-top',
+                                        RelativeSource={RelativeSource AncestorType=TabControl}}"/>
+                        </Trigger>
+                        
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Border" Property="Background" 
+                                    Value="{Binding Path=(local:Disabled.Background), RelativeSource={RelativeSource TemplatedParent}}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="TabControl">
+        <Setter Property="BorderBrush" Value="{StaticResource RetroSilver}"/>
+        <Setter Property="BorderThickness" Value="1,1,1,1"/>
+    </Style>
+</ResourceDictionary>
